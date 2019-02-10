@@ -9,7 +9,7 @@ The game presents interesting challenges from a Reinforcement Learning prospecti
 
 ## How to install
 
-clone this repository, then move in the folder and use:
+Clone this repository, then move in the folder and use:
 
     pip install -e .
 
@@ -17,7 +17,7 @@ clone this repository, then move in the folder and use:
 
 After installation, you can use this environment as any other from OpenAI gym. To make an environment make sure to `import gym_unblockme`
 
-This is a snippet example of how to run the envirnoment:
+This is a snippet example on how to run the envirnoment:
 
 	import gym
 	import gym_unblockme
@@ -36,3 +36,17 @@ You can find a testing script in `env_test.py`
 
 ## Unblock Me implementation
 
+This implementation uses a couple of semplification on the actual game. First, we only use blocks of length 2. This as made the implementation easier, and the complexity of the game was almost the same. The second assumption is that the Red Block (the target) is always horizontal.
+The goal for the game is been modified to move the Red Block to the edge of the exit.
+
+The `render()` function uses PyGame to provide a basic visualization of the game.
+
+![Grid Example](https://raw.githubusercontent.com/fedingo/gym-unblockme/master/img/grid_example.png)
+
+### Grid Generation
+Every time the environment is reset a new grid is generated. The generation function is using 3 parameters, the `WIDTH`, `HEIGHT` and `DIFFICULTY_LEVEL`. You can change the default values of this parameters and call the `reset()` function.
+The generation tries to insert `DIFFICULTY_LEVEL` blocks, drawing random positions. If the choosen position is not occupied, the block is inserted. We try to insert the same amount of vertical and horizontal blocks.
+The generated grid is not necessarily solvable. To make it more likely, the insertion of horizontal blocks will avoid the row of the red block. This is the most likely cause that make the generated boards unsolvable. If the `DIFFICULTY_LEVEL` is low enough the grid is most likely solvable.
+
+### Action Space
+The Action Space is 3-Dimensional. The first 2 dimensions are the coordinates in the game grid, starting the (0,0) from the top left corner. The third one is instead a [0,1], that indicates the direction where to move the selected block. The 0 is for the (up, left) direction, and the 1 is for the (down, right) direction.

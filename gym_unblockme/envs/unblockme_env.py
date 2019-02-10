@@ -17,10 +17,6 @@ class UnblockMeEnv(gym.Env):
 		self.WIDTH = 6; self.HEIGHT = 6; self.DIFFICULT_LEVEL = 3
 		self.reset()
 
-		self.obs_shape = self.game_class.shape
-		self.action_space = spaces.MultiDiscrete([self.WIDTH, self.HEIGHT, 2])
-		self.observation_space = spaces.Box(low=0, high=1, shape=self.obs_shape, dtype=np.int)
-
 	def step(self, action):
 
 		# Do the action
@@ -48,6 +44,10 @@ class UnblockMeEnv(gym.Env):
 
 		matrix, goal = generate(self.WIDTH,self.HEIGHT, difficulty = self.DIFFICULT_LEVEL)
 		self.game_class = unblock_me(matrix, goal)
+
+		self.obs_shape = self.game_class.shape
+		self.action_space = spaces.MultiDiscrete([self.WIDTH, self.HEIGHT, 2])
+		self.observation_space = spaces.Box(low=0, high=1, shape=self.obs_shape, dtype=np.int)
 		return self.game_class.internal_state
 
 	
