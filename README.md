@@ -4,8 +4,7 @@ Implementation for the Unblock Me game using the OpenAI Gym Library
 
 The game presents interesting challenges from a Reinforcement Learning prospective. The game requires reasoning to develop the right set of moves that the game
 
-![Game example](https://camo.githubusercontent.com/edd7f5405c3f9e58560d1e926bd1bf1909c1754b/687474703a2f2f6c6f676f6e7562756c2e636f6d2f696d616765732f756e626c6f636b2d6d652e706e67)
-
+<img src="https://camo.githubusercontent.com/edd7f5405c3f9e58560d1e926bd1bf1909c1754b/687474703a2f2f6c6f676f6e7562756c2e636f6d2f696d616765732f756e626c6f636b2d6d652e706e67" width="256" title="Game example" alt ="Game example">
 
 ## How to install
 
