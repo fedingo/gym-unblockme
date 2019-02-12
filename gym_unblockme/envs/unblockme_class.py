@@ -24,7 +24,7 @@ def get_example():
 class unblock_me:
 
 	# Initialization
-	## Input Space: N x N x 5
+	## Input Space: W x H x 4
 	# (Semplification: Only use length 2 blocks)
 	# (Semplification2: Assume Red Block is Horizontal) <--
 	#

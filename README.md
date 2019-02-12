@@ -18,6 +18,7 @@ After installation, you can use this environment as any other from OpenAI gym. T
 
 This is a snippet example on how to run the envirnoment:
 
+```python
 	import gym
 	import gym_unblockme
 
@@ -30,6 +31,7 @@ This is a snippet example on how to run the envirnoment:
 
 		if done:
 			_ = env.reset()
+```
 
 You can find a testing script in `env_test.py`
 
@@ -49,3 +51,16 @@ The generated grid is not necessarily solvable. To make it more likely, the inse
 
 ### Action Space
 The Action Space is 3-Dimensional. The first 2 dimensions are the coordinates in the game grid, starting the (0,0) from the top left corner. The third one is instead a [0,1], that indicates the direction where to move the selected block. The 0 is for the (up, left) direction, and the 1 is for the (down, right) direction.
+
+### Observation Space
+The Observation Space is a matrix ( `WIDTH` x `HEIGHT` x 4 ) of binary values [0,1]. The layered maps describe the position of the following objects:
+- Layer 0: Target Position for the Red Block
+- Layer 1: Red Block
+- Layer 2: Horizontal Blocks
+- Layer 3: Vertical Blocks 
+
+### Reward Function
+The Rewards are computed with the following logic:
+- If the action is not valid (meaning that it don't produce any meaningful movement), the reward is -0.5
+- If the action moves a block but don't solves the grid, the reward is 0
+- If the action solves the grid, the reward is 1
