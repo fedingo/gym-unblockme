@@ -1,12 +1,7 @@
-try:
-    import pygame
-    from pygame import gfxdraw
-except ImportError as e:
-    raise error.DependencyNotInstalled(
-        "{}. (HINT: install pygame using `pip install pygame`".format(e))
-
+import pygame
 import time
 import numpy as np
+import sys
 
 gray =  (150, 150, 150)
 white = (255, 255, 255)
@@ -57,6 +52,12 @@ def render_unblockme(game_object):
         pygame.init()
         screen = pygame.display.set_mode((2*MARGIN+k*SIDE, 2*MARGIN+h*SIDE))
 
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.display.quit()
+            pygame.quit()
+            sys.exit(0)
+
     screen.fill(black)
 
     # first we draw the background
@@ -92,6 +93,7 @@ def render_unblockme(game_object):
                     __draw_red_block(x,y)
 
     pygame.display.update()
+    time.sleep(0.1)
 
 if __name__ == "__main__":
     from unblockme_class import *
