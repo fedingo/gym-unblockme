@@ -1,1 +1,2 @@
 from gym_unblockme.envs.unblockme_env import UnblockMeEnv
+from gym_unblockme.envs.unblockme_env_listed import UnblockMeEnvListed

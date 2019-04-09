@@ -44,10 +44,30 @@ class unblock_me:
 		for i in range(1,4):
 			self.internal_state[:,:,i] = (matrix == i).astype(int)
 
+		self.num_blocks = np.sum((self.internal_state[:,:,1:] != 0).astype(int))/2
+
 	def __is_valid (self, x,y):
 
 		return  x >= 0 and x < self.shape[0] and \
 				y >= 0 and y < self.shape[1]
+
+	def get_block_listed(self):
+		r = np.nonzero(self.internal_state[:,:,0])
+		b = [i for i in zip(r[0],r[1])]
+		state = b
+		for i in range(1,3):
+			r = np.nonzero(self.internal_state[:, :, i])
+			b = [i for i in zip(r[0],r[1])]
+			state += (b)
+
+		# for the vertical blocks we transpose to have the coordinates in the right order
+		r = np.nonzero(np.transpose(self.internal_state[:, :, 3]))
+		b = [i for i in zip(r[1], r[0])]
+		state += (b)
+
+		r = np.array(state).flatten()
+
+		return r
 
 	def is_solved(self):
 
@@ -158,8 +178,5 @@ if __name__ == "__main__":
 	matrix, goal = get_example()
 	game = unblock_me(matrix, goal)
 	game.print()
-	game.act(1,3,1)
-	game.act(1,1,1)
-	game.act(1,2,1)
-	game.print()
-	print(game.is_solved())
+	print(game.num_blocks)
+	print(game.get_block_listed())
